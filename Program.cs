@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 var MyAllowedOrigins = "_myAllowedOrigins";
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<HomeCafeDb>(opt => opt.UseInMemoryDatabase("HomeCafeDb"));
+var connectionString = builder.Configuration.GetConnectionString("HomeCafeDb");
+
+builder.Services.AddDbContext<HomeCafeDb>(opt => opt.UseNpgsql(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
