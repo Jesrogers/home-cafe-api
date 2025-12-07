@@ -1,0 +1,12 @@
+﻿@HomeCafeApi_HostAddress = https://localhost:7255
+
+POST {{HomeCafeApi_HostAddress}}/menuitems
+Content-Type: application/json
+
+{
+  "name": "Cappuccino",
+  "description": "Rich espresso with steamed milk foam",
+  "price": "4.50"
+}
+
+###
