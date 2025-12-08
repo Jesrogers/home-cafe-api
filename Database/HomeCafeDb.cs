@@ -8,9 +8,13 @@ namespace HomeCafeApi.Database
         public HomeCafeDb(DbContextOptions<HomeCafeDb> options) : base(options) { }
 
         public DbSet<MenuItem> MenuItems => Set<MenuItem>();
+        public DbSet<Order> Orders => Set<Order>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasPostgresEnum<Sweetener>();
+            modelBuilder.HasPostgresEnum<OrderStatus>();
+
             modelBuilder.Entity<MenuItem>().ToTable("menu_items");
 
             modelBuilder.Entity<MenuItem>(entity =>
@@ -19,6 +23,25 @@ namespace HomeCafeApi.Database
                 entity.Property(e => e.Name).HasColumnName("name");
                 entity.Property(e => e.Description).HasColumnName("description");
                 entity.Property(e => e.Price).HasColumnName("price");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.ToTable("orders");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.MenuItemId).HasColumnName("menu_item_id");
+                entity.Property(e => e.CustomerName).HasColumnName("customer_name");
+                entity.Property(e => e.Sweetener).HasColumnName("sweetener");
+                entity.Property(e => e.SpecialRequests).HasColumnName("special_requests");
+                entity.Property(e => e.Status).HasColumnName("status");
+                entity.Property(e => e.CreatedAt).HasColumnName("created_at");
+                entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
+
+                entity.HasOne(o => o.MenuItem)
+                      .WithMany()
+                      .HasForeignKey(o => o.MenuItemId)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<MenuItem>().HasData(
