@@ -28,4 +28,5 @@ var app = builder.Build();
 
 app.UseCors(MyAllowedOrigins);
 app.RegisterMenuItemsEndpoints();
+app.RegisterOrdersEndpoints();
 app.Run();
