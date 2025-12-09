@@ -135,13 +135,11 @@ namespace HomeCafeApi.Migrations
 
             modelBuilder.Entity("HomeCafeApi.Models.Order", b =>
                 {
-                    b.HasOne("HomeCafeApi.Models.MenuItem", "MenuItem")
+                    b.HasOne("HomeCafeApi.Models.MenuItem", null)
                         .WithMany()
                         .HasForeignKey("MenuItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("MenuItem");
                 });
 #pragma warning restore 612, 618
         }

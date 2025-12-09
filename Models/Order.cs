@@ -4,7 +4,6 @@
     {
         public long Id { get; set; }
         public long MenuItemId { get; set; }
-        public required MenuItem MenuItem { get; set; }
         public required string CustomerName { get; set; }
         public Sweetener Sweetener { get; set; } = Sweetener.None;
         public string? SpecialRequests { get; set; }
