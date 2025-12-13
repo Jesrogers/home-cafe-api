@@ -1,5 +1,6 @@
 ﻿using HomeCafeApi.Database;
 using HomeCafeApi.Models;
+using HomeCafeApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeCafeApi.Endpoints
@@ -15,23 +16,22 @@ namespace HomeCafeApi.Endpoints
             menuItems.MapPost("/", CreateMenuItem);
         }
 
-        static async Task<IResult> GetAllMenuItems(HomeCafeDb db)
+        static async Task<IResult> GetAllMenuItems(IMenuItemService menuItemService)
         {
-            return TypedResults.Ok(await db.MenuItems.ToListAsync());
+            return TypedResults.Ok(await menuItemService.GetAllMenuItems());
         }
-        static async Task<IResult> GetMenuItem(int id, HomeCafeDb db)
+        static async Task<IResult> GetMenuItem(long id, IMenuItemService menuItemService)
         {
-            return await db.MenuItems.FindAsync(id)
-                is MenuItem menuItem
-                    ? TypedResults.Ok(menuItem)
+            var item = await menuItemService.GetMenuItem(id);
+
+            return item is not null
+                    ? TypedResults.Ok(item)
                     : TypedResults.NotFound();
         }
 
-        static async Task<IResult> CreateMenuItem(MenuItem menuItem, HomeCafeDb db)
+        static async Task<IResult> CreateMenuItem(MenuItem menuItem, IMenuItemService menuItemService)
         {
-            db.MenuItems.Add(menuItem);
-            await db.SaveChangesAsync();
-
+            await menuItemService.CreateMenuItem(menuItem);
             return TypedResults.Created($"/menuItems/{menuItem.Id}", menuItem);
         }
 

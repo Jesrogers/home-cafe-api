@@ -1,4 +1,6 @@
 ﻿using HomeCafeApi.Database;
+using HomeCafeApi.Services;
+using HomeCafeApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeCafeApi.Endpoints
@@ -10,11 +12,24 @@ namespace HomeCafeApi.Endpoints
             var orders = app.MapGroup("/orders");
 
             orders.MapGet("/", GetAllOrders);
+            orders.MapGet("/{id}", GetOrder);
+            orders.MapPost("/", CreateOrder);
         }
 
-        static async Task<IResult> GetAllOrders(HomeCafeDb db)
+        static async Task<IResult> GetAllOrders(IOrdersService ordersService)
         {
-            return TypedResults.Ok(await db.Orders.ToListAsync());
+            return TypedResults.Ok(await ordersService.GetAllOrders());
+        }
+
+        static async Task<IResult> GetOrder(IOrdersService ordersService, long id)
+        {
+            return TypedResults.Ok(ordersService.GetOrder(id));
+        }
+
+        static async Task<IResult> CreateOrder(Order order, IOrdersService ordersService) 
+        {
+            await ordersService.CreateOrder(order);
+            return TypedResults.Created($"/orders/{order.Id}", order);
         }
     }
 }

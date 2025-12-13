@@ -1,5 +1,6 @@
 using HomeCafeApi.Database;
 using HomeCafeApi.Endpoints;
+using HomeCafeApi.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("HomeCafeDb");
 
 builder.Services.AddDbContext<HomeCafeDb>(opt => opt.UseNpgsql(connectionString));
+builder.Services.AddTransient<IMenuItemService, MenuItemsService>();
+builder.Services.AddTransient<IOrdersService, OrdersService>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
