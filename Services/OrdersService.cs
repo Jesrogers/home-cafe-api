@@ -12,9 +12,19 @@ namespace HomeCafeApi.Services
             _db = db;
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrders()
+        public async Task<IEnumerable<Order>> GetAllOrders(string? status)
         {
-            return await _db.Orders.ToListAsync();
+            IQueryable<Order> query = _db.Orders;
+
+            if (!string.IsNullOrWhiteSpace(status))
+            {
+                var normalized = status.Trim().ToLower();
+
+                query = query.Where(o =>
+                    o.Status.ToLower() == normalized);
+
+            }
+            return await query.ToListAsync();
         }
 
         public async Task<Order?> GetOrder(long id)
@@ -35,7 +45,7 @@ namespace HomeCafeApi.Services
 
     public interface IOrdersService
     {
-        public Task<IEnumerable<Order>> GetAllOrders();
+        public Task<IEnumerable<Order>> GetAllOrders(string? status);
         public Task<Order?> GetOrder(long id);
         public Task<Order> CreateOrder(Order order);
     }

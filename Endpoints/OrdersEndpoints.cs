@@ -16,9 +16,9 @@ namespace HomeCafeApi.Endpoints
             orders.MapPost("/", CreateOrder);
         }
 
-        static async Task<IResult> GetAllOrders(IOrdersService ordersService)
+        static async Task<IResult> GetAllOrders(string? status, IOrdersService ordersService)
         {
-            return TypedResults.Ok(await ordersService.GetAllOrders());
+            return TypedResults.Ok(await ordersService.GetAllOrders(status));
         }
 
         static async Task<IResult> GetOrder(IOrdersService ordersService, long id)

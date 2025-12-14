@@ -15,10 +15,10 @@ POST {{HomeCafeApi_HostAddress}}/orders
 Content-Type: application/json
 
 {
-  "menuItemId": 3,
-  "customerName": "Apple",
-  "sweetener": 1,
-  "specialRequests": "Okkkkkk"
+  "menuItemId": 4,
+  "customerName": "Daisy",
+  "sweetener": "Vanilla Syrup",
+  "specialRequests": "Seriously?"
 }
 
 ###
