@@ -12,9 +12,6 @@ namespace HomeCafeApi.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasPostgresEnum<Sweetener>();
-            modelBuilder.HasPostgresEnum<OrderStatus>();
-
             modelBuilder.Entity<MenuItem>().ToTable("menu_items");
 
             modelBuilder.Entity<MenuItem>(entity =>

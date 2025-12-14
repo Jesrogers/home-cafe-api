@@ -23,7 +23,7 @@ namespace HomeCafeApi.Endpoints
 
         static async Task<IResult> GetOrder(IOrdersService ordersService, long id)
         {
-            return TypedResults.Ok(ordersService.GetOrder(id));
+            return TypedResults.Ok(await ordersService.GetOrder(id));
         }
 
         static async Task<IResult> CreateOrder(Order order, IOrdersService ordersService) 
