@@ -39,6 +39,21 @@ namespace HomeCafeApi.Services
 
             return order;
         }
+
+        public async Task<Order?> UpdateOrderStatus(long id, string status)
+        {
+            var order = await _db.Orders.FindAsync(id);
+
+            if (order is null)
+            {
+                return null;
+            }
+
+            order.Status = status.Trim();
+            await _db.SaveChangesAsync();
+
+            return order;
+        }
     }
 
 
@@ -48,5 +63,6 @@ namespace HomeCafeApi.Services
         public Task<IEnumerable<Order>> GetAllOrders(string? status);
         public Task<Order?> GetOrder(long id);
         public Task<Order> CreateOrder(Order order);
+        public Task<Order?> UpdateOrderStatus(long id, string status);
     }
 }

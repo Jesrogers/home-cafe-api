@@ -22,3 +22,12 @@ Content-Type: application/json
 }
 
 ###
+
+PATCH {{HomeCafeApi_HostAddress}}/orders/14
+Content-Type: application/json
+
+{
+  "status": "Completed"
+}
+
+###
