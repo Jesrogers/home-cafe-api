@@ -22,7 +22,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowedOrigins,
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000")
+            policy.WithOrigins(
+                "https://snuffles.cafe",
+                "http://localhost:3000"
+                )
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
