@@ -45,37 +45,80 @@ namespace HomeCafeApi.Database
                 new MenuItem
                 {
                     Id = 1,
-                    Name = "Cappuccino",
-                    Description = "Rich espresso with steamed milk foam",
-                    Price = 4.5m
+                    Name = "Cafe Latte",
+                    Description = "espresso, steamed milk"
                 },
                 new MenuItem
                 {
                     Id = 2,
-                    Name = "Latte",
-                    Description = "Smooth espresso with creamy milk",
-                    Price = 4.0m
+                    Name = "Iced Cafe Latte",
+                    Description = "espresso, milk, ice"
                 },
                 new MenuItem
                 {
                     Id = 3,
-                    Name = "Mocha",
-                    Description = "Chocolate espresso delight",
-                    Price = 4.75m
+                    Name = "Iced Americano",
+                    Description = "espresso, water, ice"
                 },
                 new MenuItem
                 {
                     Id = 4,
-                    Name = "Chai Latte",
-                    Description = "Spiced tea with steamed milk",
-                    Price = 4.25m
+                    Name = "Americano",
+                    Description = "espresso, hot water"
                 },
                 new MenuItem
                 {
                     Id = 5,
                     Name = "Matcha Latte",
-                    Description = "Creamy green tea latte",
-                    Price = 4.50m
+                    Description = "matcha, steamed milk"
+                },
+                new MenuItem
+                {
+                    Id = 6,
+                    Name = "Iced Matcha Latte",
+                    Description = "matcha, milk, ice"
+                },
+                new MenuItem
+                {
+                    Id = 7,
+                    Name = "Hojicha Latte",
+                    Description = "hojicha, steamed milk"
+                },
+                new MenuItem
+                {
+                    Id = 8,
+                    Name = "Iced Hojicha Latte",
+                    Description = "hojicha, milk, ice"
+                },
+                new MenuItem
+                {
+                    Id = 9,
+                    Name = "Hot Chocolate",
+                    Description = "hot chocolate mix, steamed milk"
+                },
+                new MenuItem
+                {
+                    Id = 10,
+                    Name = "Tea",
+                    Description = "please ask JP for current tea selection"
+                },
+                new MenuItem
+                {
+                    Id = 11,
+                    Name = "Iced Pumpkin Spice Latte (seasonal)",
+                    Description = "espresso, milk, ice, pumpkin syrup, whipped cream"
+                },
+                new MenuItem
+                {
+                    Id = 12,
+                    Name = "Iced Peppermint Mocha (seasonal)",
+                    Description = "espresso, milk, ice, chocolate sauce, peppermint flavor, whipped cream, candy cane topping"
+                },
+                new MenuItem
+                {
+                    Id = 13,
+                    Name = "Iced Jasmine Latte",
+                    Description = "jasmine tea, milk, ice"
                 }
             );
 
