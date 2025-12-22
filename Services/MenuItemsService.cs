@@ -29,6 +29,25 @@ namespace HomeCafeApi.Services
 
             return item;
         }
+
+        public async Task<MenuItem?> UpdateMenuItem(long id, UpdateMenuItemRequest request)
+        {
+            var item = await _db.MenuItems.FindAsync(id);
+
+            if (item is null) 
+            {
+                return null;
+            }
+
+            if (request.Name is not null) { item.Name = request.Name; }
+            if (request.Description is not null) {item.Description = request.Description; }
+            if (request.Price.HasValue) { item.Price = request.Price.Value; }
+            if (request.ShouldAllowCaffeine.HasValue) { item.ShouldAllowCaffeine = request.ShouldAllowCaffeine.Value; }
+            if (request.ShouldAllowSugar.HasValue) { item.ShouldAllowSugar = request.ShouldAllowSugar.Value; }
+
+            await _db.SaveChangesAsync();
+            return item;
+        }
     }
 
 
@@ -37,5 +56,6 @@ namespace HomeCafeApi.Services
         public Task<IEnumerable<MenuItem>> GetAllMenuItems();
         public Task<MenuItem?> GetMenuItem(long id);
         public Task<MenuItem> CreateMenuItem(MenuItem item);
+        public Task<MenuItem> UpdateMenuItem(long id, UpdateMenuItemRequest request);
     }
 }

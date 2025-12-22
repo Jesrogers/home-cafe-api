@@ -1,5 +1,6 @@
 ﻿using HomeCafeApi.Database;
 using HomeCafeApi.Models;
+using HomeCafeApi.Models.Responses;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeCafeApi.Services
@@ -12,24 +13,48 @@ namespace HomeCafeApi.Services
             _db = db;
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrders(string? status)
+        public async Task<IEnumerable<OrderResponse>> GetAllOrders(string? status)
         {
-            IQueryable<Order> query = _db.Orders;
+            IQueryable<Order> query = _db.Orders.Include(o => o.MenuItem);
 
             if (!string.IsNullOrWhiteSpace(status))
             {
                 var normalized = status.Trim().ToLower();
-
-                query = query.Where(o =>
-                    o.Status.ToLower() == normalized);
-
+                query = query.Where(o => o.Status.ToLower() == normalized);
             }
-            return await query.ToListAsync();
+
+            return await query
+                .Select(o => new OrderResponse
+                {
+                    Id = o.Id,
+                    MenuItemName = o.MenuItem.Name,
+                    CustomerName = o.CustomerName,
+                    Sweetener = o.Sweetener,
+                    SpecialRequests = o.SpecialRequests,
+                    Status = o.Status,
+                    CreatedAt = o.CreatedAt,
+                    UpdatedAt = o.UpdatedAt
+                })
+                .ToListAsync();
         }
 
-        public async Task<Order?> GetOrder(long id)
+        public async Task<OrderResponse?> GetOrder(long id)
         {
-            return await _db.Orders.FindAsync(id);
+            return await _db.Orders
+                .Include(o => o.MenuItem)
+                .Where(o => o.Id == id)
+                .Select(o => new OrderResponse
+                {
+                    Id = o.Id,
+                    MenuItemName = o.MenuItem.Name,
+                    CustomerName = o.CustomerName,
+                    Sweetener = o.Sweetener,
+                    SpecialRequests = o.SpecialRequests,
+                    Status = o.Status,
+                    CreatedAt = o.CreatedAt,
+                    UpdatedAt = o.UpdatedAt
+                })
+                .FirstOrDefaultAsync();
         }
 
         public async Task<Order> CreateOrder(Order order)
@@ -60,9 +85,9 @@ namespace HomeCafeApi.Services
 
     public interface IOrdersService
     {
-        public Task<IEnumerable<Order>> GetAllOrders(string? status);
-        public Task<Order?> GetOrder(long id);
-        public Task<Order> CreateOrder(Order order);
-        public Task<Order?> UpdateOrderStatus(long id, string status);
+        Task<IEnumerable<OrderResponse>> GetAllOrders(string? status);
+        Task<OrderResponse?> GetOrder(long id);
+        Task<Order> CreateOrder(Order order);
+        Task<Order?> UpdateOrderStatus(long id, string status);
     }
 }

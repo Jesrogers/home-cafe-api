@@ -7,6 +7,15 @@ Content-Type: application/json
   "name": "Cappuccino",
   "description": "Rich espresso with steamed milk foam",
   "price": "4.50"
+} 
+
+###
+
+PATCH {{HomeCafeApi_HostAddress}}/menuItems/12
+Content-Type: application/json
+
+{
+  "shouldAllowSugar": true
 }
 
 ###
@@ -20,6 +29,10 @@ Content-Type: application/json
   "sweetener": "Vanilla Syrup",
   "specialRequests": "Seriously?"
 }
+
+###
+
+GET {{HomeCafeApi_HostAddress}}/orders/14
 
 ###
 

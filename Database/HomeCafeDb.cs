@@ -20,6 +20,8 @@ namespace HomeCafeApi.Database
                 entity.Property(e => e.Name).HasColumnName("name");
                 entity.Property(e => e.Description).HasColumnName("description");
                 entity.Property(e => e.Price).HasColumnName("price");
+                entity.Property(e => e.ShouldAllowCaffeine).HasColumnName("should_allow_caffeine");
+                entity.Property(e => e.ShouldAllowSugar).HasColumnName("should_allow_sugar");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -35,8 +37,8 @@ namespace HomeCafeApi.Database
                 entity.Property(e => e.CreatedAt).HasColumnName("created_at");
                 entity.Property(e => e.UpdatedAt).HasColumnName("updated_at");
 
-                entity.HasOne<MenuItem>()
-                      .WithMany()
+                entity.HasOne(o => o.MenuItem)    
+                      .WithMany()        
                       .HasForeignKey(o => o.MenuItemId)
                       .OnDelete(DeleteBehavior.Cascade);
             });

@@ -14,6 +14,7 @@ namespace HomeCafeApi.Endpoints
             menuItems.MapGet("/", GetAllMenuItems);
             menuItems.MapGet("/{id}", GetMenuItem);
             menuItems.MapPost("/", CreateMenuItem);
+            menuItems.MapPatch("/{id}", UpdateMenuItem);
         }
 
         static async Task<IResult> GetAllMenuItems(IMenuItemService menuItemService)
@@ -33,6 +34,18 @@ namespace HomeCafeApi.Endpoints
         {
             await menuItemService.CreateMenuItem(menuItem);
             return TypedResults.Created($"/menuItems/{menuItem.Id}", menuItem);
+        }
+
+        static async Task<IResult> UpdateMenuItem(long id, UpdateMenuItemRequest request, IMenuItemService menuItemService)
+        {
+            var upsdatedItem = await menuItemService.UpdateMenuItem(id, request);
+
+            if (upsdatedItem is null)
+            {
+                return TypedResults.NotFound();
+            }
+
+            return TypedResults.Ok(upsdatedItem);
         }
 
     }
