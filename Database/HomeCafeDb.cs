@@ -20,8 +20,8 @@ namespace HomeCafeApi.Database
                 entity.Property(e => e.Name).HasColumnName("name");
                 entity.Property(e => e.Description).HasColumnName("description");
                 entity.Property(e => e.Price).HasColumnName("price");
-                entity.Property(e => e.ShouldAllowCaffeine).HasColumnName("should_allow_caffeine");
-                entity.Property(e => e.ShouldAllowSugar).HasColumnName("should_allow_sugar");
+                entity.Property(e => e.allowDecafOption).HasColumnName("allow_decaf_option");
+                entity.Property(e => e.allowSugarOption).HasColumnName("allow_sugar_option");
             });
 
             modelBuilder.Entity<Order>(entity =>

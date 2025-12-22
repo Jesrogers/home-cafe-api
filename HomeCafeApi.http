@@ -1,5 +1,10 @@
 ﻿@HomeCafeApi_HostAddress = https://localhost:7255
 
+
+GET {{HomeCafeApi_HostAddress}}/menuItems
+
+###
+
 POST {{HomeCafeApi_HostAddress}}/menuitems
 Content-Type: application/json
 
