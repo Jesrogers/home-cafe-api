@@ -42,8 +42,9 @@ namespace HomeCafeApi.Services
             if (request.Name is not null) { item.Name = request.Name; }
             if (request.Description is not null) {item.Description = request.Description; }
             if (request.Price.HasValue) { item.Price = request.Price.Value; }
-            if (request.allowDecafOption.HasValue) { item.allowDecafOption = request.allowDecafOption.Value; }
-            if (request.allowSugarOption.HasValue) { item.allowSugarOption = request.allowSugarOption.Value; }
+            if (request.AllowDecafOption.HasValue) { item.AllowDecafOption = request.AllowDecafOption.Value; }
+            if (request.AllowSugarOption.HasValue) { item.AllowSugarOption = request.AllowSugarOption.Value; }
+            if (request.IsItemOutOfStock.HasValue) { item.IsItemOutOfStock = request.IsItemOutOfStock.Value; }
 
             await _db.SaveChangesAsync();
             return item;

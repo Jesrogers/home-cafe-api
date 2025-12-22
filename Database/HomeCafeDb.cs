@@ -20,8 +20,9 @@ namespace HomeCafeApi.Database
                 entity.Property(e => e.Name).HasColumnName("name");
                 entity.Property(e => e.Description).HasColumnName("description");
                 entity.Property(e => e.Price).HasColumnName("price");
-                entity.Property(e => e.allowDecafOption).HasColumnName("allow_decaf_option");
-                entity.Property(e => e.allowSugarOption).HasColumnName("allow_sugar_option");
+                entity.Property(e => e.AllowDecafOption).HasColumnName("allow_decaf_option");
+                entity.Property(e => e.AllowSugarOption).HasColumnName("allow_sugar_option");
+                entity.Property(e => e.IsItemOutOfStock).HasColumnName("is_item_out_of_stock");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -72,55 +73,65 @@ namespace HomeCafeApi.Database
                 {
                     Id = 5,
                     Name = "Matcha Latte",
-                    Description = "matcha, steamed milk"
+                    Description = "matcha, steamed milk",
+                    AllowDecafOption = false
                 },
                 new MenuItem
                 {
                     Id = 6,
                     Name = "Iced Matcha Latte",
-                    Description = "matcha, milk, ice"
+                    Description = "matcha, milk, ice",
+                    AllowDecafOption = false
                 },
                 new MenuItem
                 {
                     Id = 7,
                     Name = "Hojicha Latte",
-                    Description = "hojicha, steamed milk"
+                    Description = "hojicha, steamed milk",
+                    AllowDecafOption = false
                 },
                 new MenuItem
                 {
                     Id = 8,
                     Name = "Iced Hojicha Latte",
-                    Description = "hojicha, milk, ice"
+                    Description = "hojicha, milk, ice",
+                    AllowDecafOption = false
                 },
                 new MenuItem
                 {
                     Id = 9,
                     Name = "Hot Chocolate",
-                    Description = "hot chocolate mix, steamed milk"
+                    Description = "hot chocolate mix, steamed milk",
+                    AllowDecafOption = false,
+                    AllowSugarOption = false
                 },
                 new MenuItem
                 {
                     Id = 10,
                     Name = "Tea",
-                    Description = "please ask JP for current tea selection"
+                    Description = "please ask JP for current tea selection",
+                    AllowDecafOption = false
                 },
                 new MenuItem
                 {
                     Id = 11,
                     Name = "Iced Pumpkin Spice Latte (seasonal)",
-                    Description = "espresso, milk, ice, pumpkin syrup, whipped cream"
+                    Description = "espresso, milk, ice, pumpkin syrup, whipped cream",
+                    AllowSugarOption = false
                 },
                 new MenuItem
                 {
                     Id = 12,
                     Name = "Iced Peppermint Mocha (seasonal)",
-                    Description = "espresso, milk, ice, chocolate sauce, peppermint flavor, whipped cream, candy cane topping"
+                    Description = "espresso, milk, ice, chocolate sauce, peppermint flavor, whipped cream, candy cane topping",
+                    AllowSugarOption = false
                 },
                 new MenuItem
                 {
                     Id = 13,
                     Name = "Iced Jasmine Latte",
-                    Description = "jasmine tea, milk, ice"
+                    Description = "jasmine tea, milk, ice",
+                    AllowSugarOption = false
                 }
             );
 
