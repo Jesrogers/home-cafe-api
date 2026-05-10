@@ -15,6 +15,7 @@ namespace HomeCafeApi.Endpoints
             menuItems.MapGet("/{id}", GetMenuItem);
             menuItems.MapPost("/", CreateMenuItem);
             menuItems.MapPatch("/{id}", UpdateMenuItem);
+            menuItems.MapDelete("/{id}", DeleteMenuItem);
         }
 
         static async Task<IResult> GetAllMenuItems(IMenuItemService menuItemService)
@@ -48,5 +49,13 @@ namespace HomeCafeApi.Endpoints
             return TypedResults.Ok(upsdatedItem);
         }
 
+        static async Task<IResult> DeleteMenuItem(long id, IMenuItemService menuItemService)
+        {
+            var deletedItem = await menuItemService.DeleteMenuItem(id);
+
+            return deletedItem is not null
+                    ? TypedResults.NoContent()
+                    : TypedResults.NotFound();
+        }
     }
 }

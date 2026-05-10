@@ -49,6 +49,21 @@ namespace HomeCafeApi.Services
             await _db.SaveChangesAsync();
             return item;
         }
+
+        public async Task<MenuItem> DeleteMenuItem(long id)
+        {
+            var item = await _db.MenuItems.FindAsync(id);
+
+            if (item is null)
+            {
+                return null;
+            }
+
+            _db.MenuItems.Remove(item);
+            await _db.SaveChangesAsync();
+
+            return item;
+        }
     }
 
 
@@ -57,6 +72,7 @@ namespace HomeCafeApi.Services
         public Task<IEnumerable<MenuItem>> GetAllMenuItems();
         public Task<MenuItem?> GetMenuItem(long id);
         public Task<MenuItem> CreateMenuItem(MenuItem item);
-        public Task<MenuItem> UpdateMenuItem(long id, UpdateMenuItemRequest request);
+        public Task<MenuItem?> UpdateMenuItem(long id, UpdateMenuItemRequest request);
+        public Task<MenuItem> DeleteMenuItem(long id);
     }
 }
