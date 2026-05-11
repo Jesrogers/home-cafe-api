@@ -23,8 +23,8 @@ namespace HomeCafeApi.Database
                 entity.Property(e => e.AllowDecafOption).HasColumnName("allow_decaf_option");
                 entity.Property(e => e.AllowSugarOption).HasColumnName("allow_sugar_option");
                 entity.Property(e => e.IsItemOutOfStock).HasColumnName("is_item_out_of_stock");
+                entity.Property(e => e.ImageURL).HasColumnName("image_url");
             });
-
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("orders");

@@ -41,6 +41,7 @@ namespace HomeCafeApi.Services
 
             if (request.Name is not null) { item.Name = request.Name; }
             if (request.Description is not null) {item.Description = request.Description; }
+            if (request.ImageURL is not null) {item.ImageURL = request.ImageURL; }
             if (request.Price.HasValue) { item.Price = request.Price.Value; }
             if (request.AllowDecafOption.HasValue) { item.AllowDecafOption = request.AllowDecafOption.Value; }
             if (request.AllowSugarOption.HasValue) { item.AllowSugarOption = request.AllowSugarOption.Value; }

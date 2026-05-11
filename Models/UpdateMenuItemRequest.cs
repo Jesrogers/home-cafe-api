@@ -8,5 +8,6 @@
         public bool? AllowDecafOption { get; set; }
         public bool? AllowSugarOption { get; set; }
         public bool? IsItemOutOfStock { get; set; }
+        public string? ImageURL { get; set; }
     }
 }
